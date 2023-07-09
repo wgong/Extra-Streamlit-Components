@@ -124,5 +124,58 @@ Firstly, add `import extra_streamlit_components as stx`
   ![](Demo_Assets/stepper_bar_demo.gif)
 
 
+## Setup
+
+Repeat for each component, 
+
+1) cd `frontend` sub-folder
+
+2) revise `package.json` by updating versions
+```
+    "react-scripts": "^5.0.1",
+    "streamlit-component-lib": "^2.0.0"
+```
+
+3) install required libraries
+```
+npm install
+```
+
+4) create `frontend/build` sub-folder
+```
+npm run build
+```
+Node.js v18.13.0
+
+in step-3, encounter 
+
+### ERROR:
+```
+error:0308010C:digital envelope routines::unsupported
+```
+https://www.google.com/search?q=error%3A0308010C%3Adigital+envelope+routines%3A%3Aunsupported&rlz=1C1RXQR_enUS1040US1045&sxsrf=AB5stBg8p8IUTDDPTrr_MZC1p_tDEvq3zQ%3A1688907599675&ei=T6-qZLXoKOK1qtsPq56E-AM&ved=0ahUKEwj1y6WM14GAAxXimmoFHSsPAT8Q4dUDCBA&uact=5&oq=error%3A0308010C%3Adigital+envelope+routines%3A%3Aunsupported&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwA0oECEEYAFCrDVirDWC6G2gBcAF4AIABAIgBAJIBAJgBAKABAqABAcABAcgBCA&sclient=gws-wiz-serp
+
+FIX: 
+Set the environment variable 
+```
+NODE_OPTIONS  = --openssl-legacy-provider
+```
+
+
+### ERROR:
+```
+Type expected.  TS1110
+```
+
+FIX: 
+```
+npm install grunt-ts 
+```
+No use after trying the newer version of typescript:
+5.1.6  (was 4.2.0) in `package.json`
+
+    "grunt-ts": "^6.0.0-beta.22",
+
+
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/mohamed512)

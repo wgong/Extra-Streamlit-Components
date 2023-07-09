@@ -4,7 +4,9 @@ import datetime
 
 
 def show_router_controls():
-    @st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
+    st.header("Router Control")
+
+    # @st.cache_data(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
     def init_router():
         return stx.Router({"/home": home, "/landing": landing})
 
@@ -20,31 +22,28 @@ def show_router_controls():
     c1, c2, c3 = st.columns(3)
 
     with c1:
-        st.header("Current route")
+        st.subheader("Current route")
         current_route = router.get_url_route()
         st.write(f"{current_route}")
     with c2:
-        st.header("Set route")
+        st.subheader("Set route")
         new_route = st.text_input("route")
         if st.button("Route now!"):
             router.route(new_route)
     with c3:
-        st.header("Session state")
+        st.subheader("Session state")
         st.write(st.session_state)
 
 
 def show_cookie_manager_controls():
-    st.write("# Cookie Manager")
+    st.header("Cookie Manager")
 
-    @st.cache(allow_output_mutation=True)
     def get_manager():
         return stx.CookieManager()
 
     cookie_manager = get_manager()
-
-    st.subheader("All Cookies:")
     cookies = cookie_manager.get_all()
-    st.write(cookies)
+    st.info(str(cookies))
 
     c1, c2, c3 = st.columns(3)
 
@@ -67,9 +66,11 @@ def show_cookie_manager_controls():
         if st.button("Delete"):
             cookie_manager.delete(cookie)
 
+    cookies = cookie_manager.get_all(key="get_all_again")
+    st.write(cookies)
 
 def show_bouncing_image():
-    st.write("# Bouncing Image")
+    st.header("Bouncing Image")
 
     image_url = "https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.svg"
     stx.bouncing_image(image_source=image_url, animate=True,
@@ -81,8 +82,8 @@ def show_bouncing_image():
     """)
 
 
-def show_top_bar():
-    st.write("# Tab Bar")
+def show_tab_bar():
+    st.header("Tab Bar")
 
     chosen_id = stx.tab_bar(data=[
         stx.TabBarItemData(id=1, title="ToDo",
@@ -105,7 +106,7 @@ def show_top_bar():
 
 
 def show_stepper_bar():
-    st.write("# Stepper Bar")
+    st.header("Stepper Bar")
     c1, c2, c3 = st.columns([1, 3, 1])
     with c1:
         st.write("Horizontal")
@@ -135,10 +136,18 @@ def show_stepper_bar():
 if __name__ == "__main__":
     show_router_controls()
     st.write("_______")
-    show_cookie_manager_controls()
+
+    show_tab_bar()
     st.write("_______")
-    show_top_bar()
-    st.write("_______")
+
     show_bouncing_image()
     st.write("_______")
+
+    show_cookie_manager_controls()
+    st.write("_______")
+
     show_stepper_bar()
+
+    DISABLED = True
+    if not DISABLED:
+        pass
